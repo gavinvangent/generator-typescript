@@ -1,0 +1,30 @@
+{
+  "name": "<%= name %>",
+  "author": "Payments CPT",
+  "version": "1.0.0",
+  "description": "<%= description %>",
+  "main": "dist/index.js",
+  "license": "<%= license %>",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "pretest": "./node_modules/.bin/tslint -c tslint.json --project tsconfig.json '*.ts' 'lib/*.ts' 'lib/**/*.ts' 'test/*.ts' 'test/**/*.ts'",
+    "coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha",
+    "test": "./node_modules/.bin/mocha"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "json"
+    ]
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

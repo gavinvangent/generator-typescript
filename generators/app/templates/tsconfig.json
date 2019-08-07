@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "es2018"
+    ],
+    "noImplicitAny": true,
+    "outDir": "dist/",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es2018",
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "test"
+  ]
+}
