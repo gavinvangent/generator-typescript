@@ -1,0 +1,62 @@
+{
+  "name": "<%= name %>",
+  "author": "<%= authorName %>",
+  "version": "1.0.0",
+  "description": "<%= description %>",
+  "license": "<%= license %>",
+  "scripts": {
+    "build": "npm run package",
+    "coverage": "npx nyc npx mocha",
+    "lint": "npx tslint -c tslint.json --project tsconfig.json",
+    "offline": "npm run sls -- offline",
+    "package": "npm run sls -- package",
+    "sls": "npx serverless",
+    "start": "npm run sls -- offline start --port 12012",
+    "test": "npx mocha"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "all": true,
+    "exclude": [
+      "node_modules",
+      "scripts",
+      "test",
+      "*.js",
+      "src/functions/*/index.ts"
+    ],
+    "check-coverage": true,
+    "cache": true,
+    "branches": 95,
+    "lines": 95,
+    "functions": 95,
+    "statements": 95,
+    "watermarks": {
+      "lines": [
+        95,
+        100
+      ],
+      "functions": [
+        95,
+        100
+      ],
+      "branches": [
+        95,
+        100
+      ],
+      "statements": [
+        95,
+        100
+      ]
+    }
+  },
+  "pre-commit": [
+    "lint",
+    "coverage",
+    "build"
+  ],
+  "devDependencies": {},
+  "dependencies": {}
+}

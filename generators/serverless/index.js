@@ -8,6 +8,16 @@ const isName = x => {
   const pattern = new RegExp(/^\S+$/)
   return pattern.test(x) ? true : 'Service name may not contain spaces'
 }
+const getRuntimeFromProps = props => {
+  switch (props.nodeVersion) {
+    case '10.16.3':
+      return 'nodejs10.x'
+    case '8.10':
+      return 'nodejs8.10'
+    default:
+      throw new Error('Runtime has not be catered for')
+  }
+}
 
 module.exports = class extends Generator {
   constructor() {
@@ -39,11 +49,11 @@ module.exports = class extends Generator {
         validate: required
       },
       {
-        type: 'input',
+        type: 'list',
         name: 'nodeVersion',
         message: 'Node runtime',
-        default: '10.15.3',
-        validate: required
+        choices: [ '10.16.3', '8.10' ],
+        default: 0
       },
       {
         type: 'list',
@@ -63,7 +73,8 @@ module.exports = class extends Generator {
   writing () {
     const properties = {
       ...this.props,
-      serviceName: this.props.name
+      serviceName: this.props.name,
+      runtime: getRuntimeFromProps(this.props)
     }
 
     return {
@@ -88,9 +99,9 @@ module.exports = class extends Generator {
 
   installDependencies () {
     const devDependencies = [
+      "@types/aws-lambda",
       "@types/chai",
       "@types/chai-as-promised",
-      "@types/glob",
       "@types/mocha",
       "@types/node",
       "@types/sinon",
@@ -98,18 +109,30 @@ module.exports = class extends Generator {
       "chai",
       "chai-as-promised",
       "mocha",
+      "mockdate",
       "nyc",
+      "pre-commit",
+      "serverless",
+      "serverless-dependson-plugin",
+      "serverless-localstack",
+      "serverless-prune-plugin",
+      "serverless-webpack",
       "sinon",
       "sinon-chai",
-      "source-map-support",
+      "ts-loader",
       "ts-node",
+      "ts-sinon",
       "tslint",
       "tslint-config-security",
       "tslint-config-standard",
-      "typescript"
+      "typescript",
+      "typescript-tslint-plugin",
+      "webpack"
     ]
 
     const dependencies = [
+      "aws-sdk",
+      "source-map-support"
     ]
 
     this.npmInstall(devDependencies, { 'save-exact': true, 'save-dev': true })
@@ -122,4 +145,8 @@ module.exports = class extends Generator {
       npm: true
     })
   }
+
+  // lint () {
+  //   this.spawnCommand('npm', ['run', 'lint'])
+  // }
 }
