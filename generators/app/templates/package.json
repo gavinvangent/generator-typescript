@@ -29,10 +29,5 @@
     ]
   },
   "devDependencies": {},
-  "dependencies": {},
-  "pre-commit": [
-    "lint",
-    "coverage",
-    "build"
-  ]
+  "dependencies": {}
 }

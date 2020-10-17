@@ -64,6 +64,8 @@ npx yo typescript:git
 
 This still needs more work, but will add a .gitignore file to your app to ensure the default files are not pushed to your git repo.
 
+It will add `pre-commit` to your devDependencies, and update the package.json with the pre-commit config. When asked if you want to overwrite the package.json file, select `y`.
+
 ### ReadMe
 
 ```sh
