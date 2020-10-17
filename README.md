@@ -4,26 +4,38 @@ Codebase for scaffolding new projects with typescript and common tools for testi
 
 ## Local Dev
 
-cd to the base folder of this project
+Change directory to the base folder of this project, and ensure you are using the version of node that you want the generated code to use (assuming you are using [nvm](https://github.com/nvm-sh/nvm)):
+
+```sh
+nvm current
+```
+
+To change your version of node, use:
+
+```sh
+nvm install xx.xx.xx
+# ie
+nvm install 12.19.0
+```
+
+Then link this code base to your local npm repo:
 
 ```sh
 npm link
 ```
 
-cd to a new directory
+Change directory to a new directory:
 
 ```sh
 cd ~/some-dir
 ```
 
-Its advisable to be using the version of node you intend your app to use:
-
-eg:
+Now ensure you are using the same version of node in this output directory:
 
 ```sh
-nvm install 12
-# or if already installed
-nvm use 12
+nvm use xx.xx.xx
+# ie
+nvm use 12.19.0
 ```
 
 ## Long Running Service

@@ -28,13 +28,11 @@ module.exports = class extends Generator {
     this.fs.copy('package.json', 'package.json', {
       process: content => {
         const json = JSON.parse(content);
-        json['pre-commit'] = {
-          "pre-commit": [
-            "lint",
-            "coverage",
-            "build"
-          ],
-        };
+        json['pre-commit'] = [
+          "lint",
+          "coverage",
+          "build"
+        ];
 
         return JSON.stringify(json, null, 2);
       }

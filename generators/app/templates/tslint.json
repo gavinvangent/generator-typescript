@@ -29,7 +29,7 @@
           "single", 
           "avoid-escape"
       ],
-      "semicolon": false,
+      "semicolon": [true, "never"],
       "triple-equals": [
           true,
           "allow-null-check"

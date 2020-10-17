@@ -42,7 +42,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'nodeVersion',
         message: 'Node runtime',
-        default: '10.15.3',
+        default: '12.19.0',
         validate: required
       },
       {
@@ -114,12 +114,5 @@ module.exports = class extends Generator {
 
     this.npmInstall(devDependencies, { 'save-exact': true, 'save-dev': true })
     this.npmInstall(dependencies, { 'save-exact': true, 'save': true })
-  }
-
-  install () {
-    this.installDependencies({
-      bower: false,
-      npm: true
-    })
   }
 }
