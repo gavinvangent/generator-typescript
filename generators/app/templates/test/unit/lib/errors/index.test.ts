@@ -1,4 +1,4 @@
-import { AppError, NotFoundError, NotImplementedError, NotSupportedError } from "../../../../lib/errors"
+import { AppError, NotFoundError, NotImplementedError, NotSupportedError } from "../../../../src/lib/errors"
 
 describe('Errors', () => {
   describe('AppError', () => {

@@ -88,25 +88,25 @@ module.exports = class extends Generator {
 
   installDependencies () {
     const devDependencies = [
-      "@types/chai",
-      "@types/chai-as-promised",
-      "@types/glob",
-      "@types/mocha",
-      "@types/node",
-      "@types/sinon",
-      "@types/sinon-chai",
-      "chai",
-      "chai-as-promised",
-      "mocha",
-      "nyc",
-      "sinon",
-      "sinon-chai",
-      "source-map-support",
-      "ts-node",
-      "tslint",
-      "tslint-config-security",
-      "tslint-config-standard",
-      "typescript"
+      '@types/chai@4.2.14',
+      '@types/chai-as-promised@7.1.3',
+      '@types/glob@7.1.3',
+      '@types/mocha@8.0.3',
+      '@types/node@14.11.10',
+      '@types/sinon@9.0.8',
+      '@types/sinon-chai@3.2.5',
+      'chai@4.2.0',
+      'chai-as-promised@7.1.1',
+      'mocha@6.2.3',
+      'nyc@15.1.0',
+      'sinon@9.2.0',
+      'sinon-chai@3.5.0',
+      'source-map-support@0.5.19',
+      'ts-node@9.0.0',
+      'tslint@6.1.3',
+      'tslint-config-security@1.16.0',
+      'typescript@4.0.3',
+      'typescript-tslint-plugin@0.5.5'
     ]
 
     const dependencies = [

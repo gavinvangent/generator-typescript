@@ -6,10 +6,13 @@
   "main": "dist/index.js",
   "license": "<%= license %>",
   "scripts": {
-    "build": "./node_modules/.bin/tsc",
-    "pretest": "./node_modules/.bin/tslint -c tslint.json --project tsconfig.json '*.ts' 'lib/*.ts' 'lib/**/*.ts' 'test/*.ts' 'test/**/*.ts'",
-    "coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha",
-    "test": "./node_modules/.bin/mocha"
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && npx tsc",
+    "coverage": "npx nyc npx mocha",
+    "lint": "npx tslint --project ./",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "node ./dist/index.js",
+    "test": "npx mocha"
   },
   "nyc": {
     "extension": [
@@ -26,5 +29,10 @@
     ]
   },
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {},
+  "pre-commit": [
+    "lint",
+    "coverage",
+    "build"
+  ]
 }
