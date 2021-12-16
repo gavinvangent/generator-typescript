@@ -1,0 +1,6 @@
+handler: src/functions/example/index.example
+name: ${self:custom.variables.stackName}-example
+events:
+  - http:
+      method: get
+      path: /example

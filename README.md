@@ -50,8 +50,10 @@ This will ask you a few questions used to configure your new app and then instal
 
 Available node runtimes are:
 
-- 12
-- 10
+- 14.x
+- 12.x
+- 10.x
+- 8.10
 
 ```sh
 npx yo typescript:serverless
@@ -59,7 +61,7 @@ npx yo typescript:serverless
 
 This will populate your folder with the files required for [Serverless](https://www.serverless.com) development using [AWS' Lambda](https://aws.amazon.com/lambda/): see [Serverless's AWS integration](https://www.serverless.com/framework/docs/providers/aws/).
 
-This will ask you a few questions used to configure your new app and then install all the required node modules. Your based structure is now ready to be used, or extended (See [plugins](#plugins)).
+This will ask you a few questions used to configure your new app and then install all the required node modules. Your base structure is now ready to be used, or extended (See [plugins](#plugins)).
 
 ## Plugins
 

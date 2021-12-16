@@ -1,0 +1,3 @@
+Variables:
+  tags:
+    stack: ${self:custom.variables.stackName}

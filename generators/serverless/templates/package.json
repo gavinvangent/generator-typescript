@@ -7,9 +7,15 @@
   "scripts": {
     "build": "npm run package",
     "coverage": "npx nyc npx mocha",
+    "deploy:dev": "npm run sls -- deploy --stage development",
     "lint": "npx tslint -c tslint.json --project tsconfig.json",
-    "offline": "npm run sls -- offline",
+    "localstack:start": "docker pull localstack/localstack:latest && docker run --rm -itd -p 4566:4566 -p 4571:4571 --name localstack localstack/localstack && sleep 10 && aws s3api create-bucket --bucket <%= bucketName %> --endpoint http://localhost:4566 --region us-east-1",
+    "localstack:restart": "npm run localstack:destroy && npm run localstack:start",
+    "localstack:stop": "docker stop localstack",
+    "localstack:destroy": "docker rm -f localstack",
+    "offline": "npm run sls -- offline --stage development",
     "package": "npm run sls -- package",
+    "remove:dev": "npm run sls -- remove --stage development",
     "sls": "npx serverless",
     "start": "npm run sls -- offline start --port 12012",
     "test": "npx mocha"
@@ -25,6 +31,7 @@
       "scripts",
       "test",
       "*.js",
+      ".webpack",
       "src/functions/*/index.ts"
     ],
     "check-coverage": true,
@@ -52,11 +59,6 @@
       ]
     }
   },
-  "pre-commit": [
-    "lint",
-    "coverage",
-    "build"
-  ],
   "devDependencies": {},
   "dependencies": {}
 }
