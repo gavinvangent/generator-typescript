@@ -1,46 +1,48 @@
-service:
-  name: ${env:SERVICE_NAME, opt:service-name, 'service-lambdas'}
+service: <%= name %>
+
+frameworkVersion: '2'
+variablesResolutionMode: 20210326
 
 custom:
-  stage: ${env:STAGE, opt:stage, 'local'}
+  stage: ${env:STAGE, opt:stage, 'development'}
+  default: ${file(./serverless/config/default.yml):Variables}
   variables: ${file(./serverless/config/${self:custom.stage}.yml):Variables}
 
-  region: ${self:custom.variables.region}
-  subsystem: ${self:custom.variables.subsystem, 'yo-typescript-serverless'}
-  alias: 'service'
+  webpack:
+    keepOutputDirectory: true
 
-  dependsOn:
-    enabled: true
-    chains: 10
-
-  prune:
-    automatic: true
-    number: 3
+  localstack:
+    debug: true
+    stages:
+      - development
+    autostart: false
+    lambda:
+      mountCode: false
 
 plugins:
-  - serverless-dependson-plugin
   - serverless-webpack
-  - serverless-prune-plugin
+  - serverless-localstack
+  - serverless-offline
 
 provider:
   name: aws
-  runtime: nodejs10.x # please check that this matches
-  stackName: ${self:custom.subsystem}-${self:custom.alias}-lambdas
+  runtime: nodejs<%= nodeVersion %>
   stage: ${self:custom.stage}
-  region: ${self:custom.region}
-  cfLogs: true
+  region: ${self:custom.variables.region}
+  profile: ${self:custom.variables.profile}
+  lambdaHashingVersion: 20201221
   memorySize: 128
   timeout: 30
-  role: ${self:custom.variables.role}
-  stackTags:
-    service: ${self:service}
+  stackName: ${self:custom.variables.stackName}
+  stackTags: ${self:custom.default.tags}
   deploymentBucket:
-    name: ${self:custom.variables.deploymentBucket.name, 'serverless-deployment'}
-  environment:
-    FOO: bar
+    name: ${self:custom.variables.bucketName}
+    maxPreviousDeploymentArtifacts: 3
+    tags: ${self:custom.default.tags}
 
 functions:
-  default: ${file(./serverless/functions/default.yml)}
+  example: ${file(./serverless/functions/example.yml)}
   
 resources:
   - Resources: ${file(./serverless/infrastructure/iam.yml):Resources}
+  - Outputs: ${file(./serverless/infrastructure/iam.yml):Outputs}

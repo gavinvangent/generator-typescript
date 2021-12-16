@@ -1,5 +1,6 @@
 const path = require('path');
 const slsw = require('serverless-webpack');
+const nodeExterals = require('webpack-node-externals');
 
 module.exports = {
     mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
@@ -20,6 +21,11 @@ module.exports = {
             { test: /\.tsx?$/, loader: 'ts-loader' },
         ],
     },
+    externals: [
+        nodeExterals({
+            whitelist: /^(?!some-excluded-module|some-other-excluded-module|aws-sdk).*$/,
+        })
+    ],
     optimization: {
         minimize: false
     }
