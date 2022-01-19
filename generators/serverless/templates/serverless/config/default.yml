@@ -1,3 +1,7 @@
-Variables:
-  tags:
-    stack: ${self:custom.variables.stackName}
+bucketName: <%= bucketName %>
+region: us-east-1
+stackName: <%= stackName %>
+
+tags:
+  account: ${self:custom.stage}
+  stack: ${self:custom.variables.stackName}
