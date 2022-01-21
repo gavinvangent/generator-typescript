@@ -5,8 +5,7 @@ variablesResolutionMode: 20210326
 
 custom:
   stage: ${env:STAGE, opt:stage, 'development'}
-  default: ${file(./serverless/config/default.yml):Variables}
-  variables: ${file(./serverless/config/${self:custom.stage}.yml):Variables}
+  variables: ${file(./serverless/config/variables.${self:custom.stage}.yml)}
 
   webpack:
     keepOutputDirectory: true
@@ -34,11 +33,11 @@ provider:
   memorySize: 128
   timeout: 30
   stackName: ${self:custom.variables.stackName}
-  stackTags: ${self:custom.default.tags}
+  stackTags: ${self:custom.variables.tags}
   deploymentBucket:
     name: ${self:custom.variables.bucketName}
     maxPreviousDeploymentArtifacts: 3
-    tags: ${self:custom.default.tags}
+    tags: ${self:custom.variables.tags}
 
 functions:
   example: ${file(./serverless/functions/example.yml)}

@@ -1,5 +1,2 @@
-Variables:
-  region: us-east-1
-  stackName: <%= stackName %>
-  bucketName: '' # leave this blank unless you have created the bucket yourself
-  profile: ''
+accountId: ''
+profile: ''

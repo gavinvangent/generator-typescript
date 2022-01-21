@@ -125,6 +125,7 @@ module.exports = class extends Generator {
       "@types/sinon-chai@^3",
       "chai@^4",
       "chai-as-promised@^7",
+      "merge-yaml-cli@^1.1.2",
       "mocha@^6",
       "mockdate@^2",
       "nyc@^14",
