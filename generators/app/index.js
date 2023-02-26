@@ -105,7 +105,7 @@ module.exports = class extends Generator {
       'ts-node@9.0.0',
       'tslint@6.1.3',
       'tslint-config-security@1.16.0',
-      'typescript@4.0.3',
+      'typescript@4.9.5',
       'typescript-tslint-plugin@0.5.5'
     ]
 
