@@ -42,7 +42,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'nodeVersion',
         message: 'Node runtime',
-        default: '12.19.0',
+        default: '16.16.0',
         validate: required
       },
       {
