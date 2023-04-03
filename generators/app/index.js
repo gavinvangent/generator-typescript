@@ -92,7 +92,7 @@ module.exports = class extends Generator {
       '@types/chai-as-promised@7.1.3',
       '@types/glob@7.1.3',
       '@types/mocha@8.0.3',
-      '@types/node@14.11.10',
+      '@types/node@16',
       '@types/sinon@9.0.8',
       '@types/sinon-chai@3.2.5',
       'chai@4.2.0',
