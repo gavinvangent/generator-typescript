@@ -42,7 +42,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'nodeVersion',
         message: 'Node runtime',
-        default: '16.16.0',
+        default: '16.20.2',
         validate: required
       },
       {
@@ -104,7 +104,6 @@ module.exports = class extends Generator {
       'source-map-support@0.5.19',
       'ts-node@9.0.0',
       'tslint@6.1.3',
-      'tslint-config-security@1.16.0',
       'typescript@4.9.5',
       'typescript-tslint-plugin@0.5.5'
     ]

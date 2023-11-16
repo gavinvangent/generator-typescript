@@ -1,7 +1,4 @@
 {
-    "extends": [
-        "tslint-config-security"
-    ],
     "rules": {
         "class-name": false,
         "comment-format": [

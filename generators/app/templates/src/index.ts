@@ -2,8 +2,8 @@ const start = async () => {
 
 }
 
-console.log('Starting');
+console.log('Starting')
 start()
   .then(() => {
-    console.log('Complete');
+    console.log('Complete')
   })
