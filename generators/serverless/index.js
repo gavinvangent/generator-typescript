@@ -10,23 +10,23 @@ const isName = x => {
 }
 const getRuntimeFromProps = props => {
   switch (props.nodeVersion) {
-    case '14.x':
-      return 'nodejs14.x'
-    case '10.x':
-      return 'nodejs10.x'
-    case '8.10':
-      return 'nodejs8.10'
+    case '22.x':
+      return 'nodejs22.x'
+    case '20.x':
+      return 'nodejs20.x'
+    case '18.x':
+      return 'nodejs18.x'
     default:
       throw new Error('Runtime has not be catered for')
   }
 }
 
-module.exports = class extends Generator {
+module.exports = class extends Generator.default {
   constructor() {
     super(...arguments)
   }
 
-  prompting() {
+  async prompting() {
     this.log(`Generating project using ${chalk.red('generator-typescript')}`)
     const appname = this.appname.trim().replace(/\s/g, '-')
 
@@ -80,13 +80,10 @@ module.exports = class extends Generator {
       }
     ]
 
-    return this.prompt(prompts)
-      .then(props => {
-        this.props = props
-      })
+    this.props = await this.prompt(prompts)
   }
 
-  writing() {
+  async writing() {
     const properties = {
       ...this.props,
       serviceName: this.props.name,
@@ -113,7 +110,7 @@ module.exports = class extends Generator {
     }
   }
 
-  installDependencies() {
+  async installDependencies() {
     const baseNodeVersion = this.props.nodeVersion.replace('.x', '');
 
     const devDependencies = [
@@ -150,18 +147,14 @@ module.exports = class extends Generator {
       "source-map-support@^0.5"
     ]
 
-    this.npmInstall(devDependencies, { 'save-exact': true, 'save-dev': true })
-    this.npmInstall(dependencies, { 'save-exact': true, 'save': true })
+    await this.installDevDependencies(devDependencies)
+    await this.installDependencies(dependencies)
   }
 
-  install() {
-    this.installDependencies({
+  async install() {
+    return this.installDependencies({
       bower: false,
       npm: true
     })
   }
-
-  // lint () {
-  //   this.spawnCommand('npm', ['run', 'lint'])
-  // }
 }

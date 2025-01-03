@@ -3,12 +3,12 @@
 const Generator = require('yeoman-generator');
 const required = x => !!x.length || 'Input required'
 
-module.exports = class extends Generator {
+module.exports = class extends Generator.default {
   constructor() {
     super(...arguments)
   }
 
-  prompting() {
+  async prompting() {
     const prompts = [
       {
         type: 'input',
@@ -18,13 +18,10 @@ module.exports = class extends Generator {
       }
     ]
 
-    return this.prompt(prompts)
-      .then(props => {
-        this.props = props
-      })
+    this.props = await this.prompt(prompts)
   }
 
-  writing() {
+  async writing() {
     return {
       readme: this.fs.copyTpl(
         this.templatePath('README.md'),

@@ -1,11 +1,8 @@
 {
   "name": "generator-typescript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A yeoman generator that sets up a new codebase with all the basic requirements: typescript, tests, compilers, etc",
   "main": "index.js",
-  "scripts": {
-    "test": "NODE_ENV=test mocha ./test/"
-  },
   "files": [
     "generators"
   ],
@@ -14,8 +11,9 @@
   ],
   "author": "Gavin van Gent",
   "license": "ISC",
-  "dependencies": {
-    "chalk": "2.4.2",
-    "yeoman-generator": "4.0.1"
+  "devDependencies": {
+    "chalk": "5.4.1",
+    "deep-extend": "0.6.0",
+    "yeoman-generator": "7.4.0"
   }
 }

@@ -1,31 +1,30 @@
 'use strict'
 
-const Generator = require('yeoman-generator');
-const { installDependencies } = require('yeoman-generator/lib/actions/install');
+var Generator = require('yeoman-generator');
 
-module.exports = class extends Generator {
+module.exports = class extends Generator.default {
   constructor() {
     super(...arguments)
   }
 
-  init() {
-    this.spawnCommandSync('git', ['init', '--quiet'])
+  async init() {
+    return this.spawnCommandSync('git', ['init', '--quiet'])
   }
 
-  installDependencies() {
+  async install() {
     const devDependencies = [
-      'pre-commit@1.2.2'
+      'pre-commit@1'
     ]
 
     const dependencies = [
     ]
 
-    this.npmInstall(devDependencies, { 'save-exact': true, 'save-dev': true })
-    this.npmInstall(dependencies, { 'save-exact': true, 'save': true })
+    await this.addDevDependencies(devDependencies);
+    await this.addDependencies(dependencies);
   }
 
-  modifyPackageJson() {
-    this.fs.copy('package.json', 'package.json', {
+  async modifyPackageJson() {
+    return this.fs.copy('package.json', 'package.json', {
       process: content => {
         const json = JSON.parse(content);
         json['pre-commit'] = [
@@ -37,9 +36,11 @@ module.exports = class extends Generator {
         return JSON.stringify(json, null, 2);
       }
     });
+
+    console.log('modifyPackageJson', 'end');
   }
 
-  writing() {
+  async writing() {
     return {
       gitignore: this.fs.copyTpl(
         this.templatePath('.gitignore'),

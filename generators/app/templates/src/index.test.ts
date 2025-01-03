@@ -9,7 +9,6 @@ describe('Index', () => {
 
   afterEach(() => {
     sandbox.restore()
-    sandbox = undefined
   })
 
   describe('your tests go here', () => {

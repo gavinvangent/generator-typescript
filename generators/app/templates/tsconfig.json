@@ -1,30 +1,31 @@
 {
   "compilerOptions": {
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "lib": ["es7"],
-      "module": "commonjs",
-      "noUnusedLocals": true,
-      "noUnusedParameters": false,
-      "outDir": "dist",
-      "preserveConstEnums": true,
-      "sourceMap": true,
-      "target": "es6",
-      "experimentalDecorators": true,
-      "typeRoots": [
-          "types",
-          "node_modules/@types"
-      ],
-      "plugins": [
-        { "name": "typescript-tslint-plugin" }
-      ]
+    "lib": [
+      "es7",
+      "ESNext.AsyncIterable"
+    ],
+    "target": "es6",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "outDir": "dist",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ]
   },
   "include": [
-      "src/**/*"
+    "src/**/*"
   ],
   "exclude": [
-      "dist",
-      "node_modules",
-      "src/**/*.test.ts"
+    "dist",
+    "node_modules"
   ]
 }
