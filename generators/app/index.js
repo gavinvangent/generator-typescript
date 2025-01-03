@@ -9,13 +9,13 @@ const isName = x => {
   return pattern.test(x) ? true : 'Service name may not contain spaces'
 }
 
-module.exports = class extends Generator {
+module.exports = class extends Generator.default {
   constructor() {
     super(...arguments)
   }
 
-  prompting() {
-    this.log(`Generating project using ${chalk.red('generator-typescript')}`)
+  async prompting() {
+    this.log(`Generating project using ${chalk.default.red('generator-typescript')}`)
     const appname = this.appname.trim().replace(/\s/g, '-')
 
     const prompts = [
@@ -42,7 +42,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'nodeVersion',
         message: 'Node runtime',
-        default: '16.20.2',
+        default: '22.12.0',
         validate: required
       },
       {
@@ -54,13 +54,10 @@ module.exports = class extends Generator {
       }
     ]
 
-    return this.prompt(prompts)
-      .then(props => {
-        this.props = props
-      })
+    this.props = await this.prompt(prompts)
   }
 
-  writing () {
+  async writing () {
     const properties = {
       ...this.props,
       serviceName: this.props.name
@@ -78,6 +75,18 @@ module.exports = class extends Generator {
         properties
       ),
 
+      nycrc: this.fs.copyTpl(
+        this.templatePath('.nycrc.yml'),
+        this.destinationPath('.nycrc.yml'),
+        properties
+      ),
+
+      mocharc: this.fs.copyTpl(
+        this.templatePath('.mocharc.yml'),
+        this.destinationPath('.mocharc.yml'),
+        properties
+      ),
+
       templates: this.fs.copyTpl(
         this.templatePath('**'),
         this.destinationPath(),
@@ -86,32 +95,33 @@ module.exports = class extends Generator {
     }
   }
 
-  installDependencies () {
+  async install() {
     const devDependencies = [
-      '@types/chai@4.2.14',
-      '@types/chai-as-promised@7.1.3',
-      '@types/glob@7.1.3',
-      '@types/mocha@8.0.3',
-      '@types/node@16',
-      '@types/sinon@9.0.8',
-      '@types/sinon-chai@3.2.5',
-      'chai@4.2.0',
-      'chai-as-promised@7.1.1',
-      'mocha@6.2.3',
-      'nyc@15.1.0',
-      'sinon@9.2.0',
-      'sinon-chai@3.5.0',
-      'source-map-support@0.5.19',
-      'ts-node@9.0.0',
-      'tslint@6.1.3',
-      'typescript@4.9.5',
-      'typescript-tslint-plugin@0.5.5'
+      '@types/chai@^5.0.0',
+      '@types/chai-as-promised@^8.0.0',
+      '@types/mocha@^10.0.0',
+      '@types/node@^22.0.0',
+      '@types/sinon@^17.0.0',
+      '@types/sinon-chai@^4.0.0',
+      'chai@^5.0.0',
+      'chai-as-promised@^8.0.0',
+      'eslint@^9.0.0',
+      'eslint-plugin-unused-imports@^4.0.0',
+      'mocha@^11.0.0',
+      'nyc@^17.0.0',
+      'sinon@^19.0.0',
+      'sinon-chai@^4.0.0',
+      'source-map-support@^0.5.0',
+      'ts-sinon@^1.0.0',
+      'tsx@^4.0.0',
+      'typescript@^5.0.0',
+      'typescript-eslint@^8.0.0'
     ]
 
     const dependencies = [
     ]
 
-    this.npmInstall(devDependencies, { 'save-exact': true, 'save-dev': true })
-    this.npmInstall(dependencies, { 'save-exact': true, 'save': true })
+    await this.addDevDependencies(devDependencies)
+    await this.addDependencies(dependencies)
   }
 }

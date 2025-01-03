@@ -1,32 +1,19 @@
 {
   "name": "<%= name %>",
   "author": "<%= authorName %>",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "<%= description %>",
   "main": "dist/index.js",
   "license": "<%= license %>",
   "scripts": {
-    "clean": "rm -rf ./dist",
-    "build": "npm run clean && npx tsc",
+    "clean": "rm -rf ./dist ./coverage ./.nyc_output",
+    "tsc": "npx tsc -p ./tsconfig.package.json",
+    "build": "npm run clean && npm run tsc",
     "coverage": "npx nyc npx mocha",
-    "lint": "npx tslint --project ./",
+    "lint": "npx eslint ./src",
     "lint:fix": "npm run lint -- --fix",
-    "start": "ts-node -T ./src/index.ts",
+    "start": "tsx ./src/index.ts",
     "test": "npx mocha"
-  },
-  "nyc": {
-    "extension": [
-      ".ts",
-      ".tsx"
-    ],
-    "include": [
-      "src/**/*.ts"
-    ],
-    "reporter": [
-      "lcov",
-      "text",
-      "json"
-    ]
   },
   "devDependencies": {},
   "dependencies": {}

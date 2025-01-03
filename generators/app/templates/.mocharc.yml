@@ -1,0 +1,6 @@
+import: tsx
+require:
+  - 'test/support/setup.ts'
+spec: 'src/**/*.test.ts'
+reporter: spec
+check-leaks: true

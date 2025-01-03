@@ -1,8 +1,8 @@
-import { AppError, NotFoundError, NotImplementedError, NotSupportedError } from "../../../../src/lib/errors"
+import { AppError, NotFoundError, NotImplementedError, NotSupportedError } from "."
 
 describe('Errors', () => {
   describe('AppError', () => {
-    describe('Constructor', () => {
+    describe('constructor', () => {
       it('should construct as expected, with the expected properties', () => {
         const technicalErrorMessage = 'Area 51 was just raided by aliens'
         const readableErrorMessage = 'Men wearing tinfoil hats believe aliens attacked USA'
