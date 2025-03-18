@@ -1,0 +1,36 @@
+extension:
+    - ".ts"
+    - ".tsx"
+exclude:
+    - "**/*.test.ts"
+    - "**/test/**/*.ts"
+    - "src/index.ts"
+    - "dist/"
+    - "coverage/"
+    - "test"
+reporter:
+    - lcov
+    - json
+    - text
+    - cobertura
+all: true
+cache: true
+check-coverage: true ## set to true to error the coverage if the thresholds aren't met
+# nyc currently has a bug with reporting on branch coverage. Dont fail if branch coverage isnt sufficient. See https://github.com/istanbuljs/nyc/issues/1540
+# branches: 85
+lines: 85
+functions: 85
+statements: 85
+watermarks:
+    lines:
+        - 85
+        - 95
+    functions:
+        - 85
+        - 95
+    branches:
+        - 85
+        - 95
+    statements:
+        - 85
+        - 95

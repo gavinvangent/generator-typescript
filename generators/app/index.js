@@ -67,6 +67,11 @@ module.exports = class extends Generator {
     }
 
     return {
+      mocharc: this.fs.copyTpl(
+        this.templatePath('.mocharc.yml'),
+        this.destinationPath('.mocharc.yml')
+      ),
+
       npm: this.fs.copyTpl(
         this.templatePath('.npmrc'),
         this.destinationPath('.npmrc')
@@ -75,6 +80,12 @@ module.exports = class extends Generator {
       nvmrc: this.fs.copyTpl(
         this.templatePath('.nvmrc'),
         this.destinationPath('.nvmrc'),
+        properties
+      ),
+
+      nycrc: this.fs.copyTpl(
+        this.templatePath('.nycrc.yml'),
+        this.destinationPath('.nycrc.yml'),
         properties
       ),
 
@@ -88,24 +99,23 @@ module.exports = class extends Generator {
 
   installDependencies () {
     const devDependencies = [
-      '@types/chai@4.2.14',
-      '@types/chai-as-promised@7.1.3',
-      '@types/glob@7.1.3',
-      '@types/mocha@8.0.3',
-      '@types/node@16',
-      '@types/sinon@9.0.8',
-      '@types/sinon-chai@3.2.5',
-      'chai@4.2.0',
-      'chai-as-promised@7.1.1',
-      'mocha@6.2.3',
-      'nyc@15.1.0',
-      'sinon@9.2.0',
-      'sinon-chai@3.5.0',
-      'source-map-support@0.5.19',
-      'ts-node@9.0.0',
-      'tslint@6.1.3',
-      'typescript@4.9.5',
-      'typescript-tslint-plugin@0.5.5'
+      '@eslint/js@9',
+      '@types/chai@4',
+      '@types/chai-as-promised@7',
+      '@types/glob@7',
+      '@types/mocha@8',
+      '@types/node@22', // TODO - this needs to use the version of node selected in the generate prompts
+      '@types/sinon-chai@3',
+      'chai@4',
+      'chai-as-promised@7',
+      'eslint@9',
+      'mocha@10',
+      'nyc@17',
+      'sinon-chai@3',
+      'ts-sinon@1',
+      'tsx@4',
+      'typescript@5',
+      'typescript-eslint@8'
     ]
 
     const dependencies = [
